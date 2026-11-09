@@ -1,6 +1,8 @@
 import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
+import { Button, Platform, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { randomGenerator } from '../generator_logic/generator';
+import {useState, createContext} from "react"
 
 import { AnimatedIcon } from '@/components/animated-icon';
 import { HintRow } from '@/components/hint-row';
@@ -8,6 +10,8 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { WebBadge } from '@/components/web-badge';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+
+
 
 function getDevMenuHint() {
   if (Platform.OS === 'web') {
@@ -28,38 +32,80 @@ function getDevMenuHint() {
   );
 }
 
+
+
+
 export default function HomeScreen() {
+  const [character, setCharacter] = useState(randomGenerator())
+ 
+
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
+          
           <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
+            Random Character Generator
           </ThemedText>
         </ThemedView>
-
-        <ThemedText type="code" style={styles.code}>
-          get started
+<ThemedView className="Ideas">
+       <ThemedText type="default">
+          Species: {character.Species}
         </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
+        <ThemedText type="default">
+          Body: {character.Body}
+        </ThemedText>
+        <ThemedText type="default">
+          Skin: {character.Skin}
+        </ThemedText> 
+        <ThemedText type="default">
+          Skin Colour: {character.SkinColour}
+        </ThemedText> 
+        <ThemedText type="default">
+          Face Shape: {character.Face}
+        </ThemedText> 
+       
+      <ThemedText type="default">
+          Eye Shape: {character.Eye}
+        </ThemedText> 
+        <ThemedText type="default">
+          Eye Colour: {character.EyeColour}
+        </ThemedText> 
+       <ThemedText type="default">
+          Hair Length: {character.HairLength}
+        </ThemedText> 
+        <ThemedText type="default">
+          Hair Colour: {character.HairColour}
+        </ThemedText> 
+       <ThemedText type="default">
+          Nose: {character.Nose}
+        </ThemedText> 
+       <ThemedText type="default">
+          Ears: {character.Ears}
+        </ThemedText> 
+        <ThemedText type="default">
+          Additional: {character.Additional}
+        </ThemedText> 
+       <ThemedText type="default">
+          Markings: {character.Markings}
+        </ThemedText> 
+       <ThemedText type="default">
+          Accessories: {character.Accessories}
+        </ThemedText> 
         </ThemedView>
+       
+       <Button
+        onPress={() => setCharacter(randomGenerator())}
+  title="Refresh"
+  color="#841584"
+  accessibilityLabel="Press to refresh the generator" />
 
         {Platform.OS === 'web' && <WebBadge />}
       </SafeAreaView>
     </ThemedView>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
